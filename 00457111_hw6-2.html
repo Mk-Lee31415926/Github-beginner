@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Story Creator</title>
+	<style type="text/css">
+		#space {
+			height: 400px;
+			width: 40%;
+			overflow: scroll;
+			font-family: perpetua;
+			font-size: 16px bold;
+			background-color: #ffff99;
+		}
+	</style>
+	<script type="text/javascript">
+		var article = ["the", "a", "one", "some","any"];
+		var noun = ["boy", "girl", "dog", "cat", "car"];
+		var verb = ["drove", "jumped", "ran", "walked" , "skipped"];
+		var prep = ["to", "from", "over", "under", "on"];
+		var sentence = new Array(6);
+		function start()
+		{
+			var button = document.getElementById("button");
+			button.addEventListener("click", story, false);
+			//storyspace = document.getElementById("space");
+			//makeSentence(storyspace);
+		}
+		function makeSentence( output )
+		{
+			
+			var string = article[random(article.length)];
+			//NEED to handle the uppercase part...
+			string = string.substring(0,1).toUpperCase() + string.substring(1,string.length); 
+
+			var stringTest = string.charAt(0).toUpperCase() + string.substring(1,string.length);
+
+			console.log (stringTest);
+			//console.log (string.substring(0,1));
+			//console.log (string.substring(1,string.length));
+			sentence[0] = stringTest ;
+			//console.log (string);
+			sentence[1] = noun[random(noun.length)];
+			sentence[2] = verb[random(verb.length)];
+			sentence[3] = prep[random(prep.length)];
+			sentence[4] = article[random(article.length)];
+			sentence[5] = noun[random(noun.length)];
+			output.innerHTML += sentence.join(" ") + ".<br><br>";
+		}
+		function story()
+		{
+			var storyspace = document.getElementById("space"); //the 'div' part 
+			var getLines = document.getElementById("lines").value;
+
+			storyspace.innerHTML = "";
+			//console.log (getLines);
+			getLines = parseInt(getLines);
+			//console.log (getLines);
+			if((getLines >= 1) && (getLines <= 30))
+			{}
+			else
+			{
+				window.alert("invalid number of lines");
+				console.log("invalid number of lines");
+			 	getLines = 10;
+			}
+
+			storyspace.innerHTML += "Once upon a time...<br><br>";
+			//console.log(storyspace);
+			for (var i = 0; i < getLines; i++) 
+			{
+				makeSentence(storyspace);
+			}
+			storyspace.innerHTML += "THE END<br>";
+		}
+		function random( num )
+		{
+			return Math.floor (Math.random() * num);
+		}
+		window.addEventListener("load", start, false);
+	</script>
+</head>
+<body>
+	<div id = "space"></div>
+	<p># of sentences:
+		<input type="number" id = "lines" name="# of sentences" value ="10"></p>
+	<input type = "button" id = "button" value ="Generate Short Story">
+</body>
+</html>

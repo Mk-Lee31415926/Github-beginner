@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Exercise 6-1</title>
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/earlyaccess/cwtexkai.css');
+		div	{
+			text-align: center;
+			font-family: 'cwTeXKai', Perpetua, serif;
+		}
+		#fixed 	{
+			color:dimgray;
+		}	
+		#generate	{
+			color:navy;
+		}
+		#verb	{
+			color:firebrick;
+			font-size: 150%;
+		}
+	</style>
+	<script type="text/javascript">
+		var Adj = ["客戶那邊的", "我們的", "負責談需求的", "負責這個部分的", "直到上線前一天", "(雙手一攤)"];
+		var Noun = ["專案經理", "主管", "工程師", "設計師", "外包", "User", "聯絡窗口"];
+		var Verb = ["當初沒有講清楚", "一直換", "說他肚子不舒服", "擺爛不想做了", "突然開始放長假", "去生小孩了", "離職了", "都沒甚麼sense", "都沒有跟我講", "以為這些不用做", "一直在狀況外", "做事拖拖拉拉", "還搞不清楚狀況", "Quality有問題", "東西一直改", "在整我", "突然就沒來了"];
+		var picName = ["Cat","Yao","Harry","Jacky"];
+		var showImage;
+		var paragraph ;
+		var myverb;
+		function start()
+		{
+			paragraph = document.getElementById("generate");
+			myverb = document.getElementById("verb");
+			showImage = document.getElementById("pic");
+			// 當點圖的時候reload..
+			showImage.addEventListener("click", reloadPage, false);
+			output();
+		}
+		function reloadPage() {
+			location.reload();
+		}
+		function output()
+		{
+			//use Array.length to get the number of elements to randomly get
+			var getAdj = Adj[getRandom(Adj.length)];
+			var getNoun = Noun[getRandom(Noun.length)];
+			var getVerb = Verb[getRandom(Verb.length)];
+			var getPic = picName[getRandom(picName.length)];
+			console.log (getAdj,getNoun,getVerb,getPic);
+			paragraph.innerHTML = getAdj + getNoun + "<span id ='verb'>" + getVerb + "</span>";
+			showImage.setAttribute("src",getPic + ".jpg"); 
+			showImage.setAttribute("alt",getPic + "'s picture");
+		}
+		function getRandom (num)
+		{
+			var number = Math.floor(Math.random() * num);
+			return number;
+		}
+		window.addEventListener("load", start, false);
+	</script>
+</head>
+<body>
+	<div id = "info">
+		<h1 id = "fixed">專案失敗了...</h1>
+		<h1 id = "generate"></h1>
+		<img id = "pic">
+	</div>
+</body>
+</html>
